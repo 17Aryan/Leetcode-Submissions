@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int n=nums.size();
+        int j=0,e=n-1;
+        if(target>nums[n-1]){
+            return n;
+        }
+        while(j<e){
+            int m=j+(e-j)/2;
+            if(nums[m]>=target){
+                e=m;
+            }
+            else
+                j=m+1;
+        }
+        return j;
+    }
+};
