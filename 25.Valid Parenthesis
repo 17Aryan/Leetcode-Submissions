@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        int l=s.length();
+        string last;
+        last.push_back(s[0]);
+
+        map<char,char> c={{')','('}, {'}','{'},{']','['}};
+
+        for(int i=1;i<l;i++){
+            if(s[i]=='(' || s[i]=='{' || s[i]=='['){
+                last.push_back(s[i]);
+            }
+            else{
+                if(c[s[i]]!=last.back())
+                    return false;
+                else 
+                    last.pop_back();
+            }
+        }
+        if(last.length()==0)
+            return true;
+        else
+            return false;
+    }
+};
