@@ -1,0 +1,26 @@
+class Solution {
+public:
+    unordered_map<string,int> ump;
+
+    vector<int> findSubstring(string s, vector<string>& words) {
+        int l=words[0].size();
+        int k=words.size();
+        vector<int> ans;
+        for(string word:words)
+            ump[word]++;//returns the word length
+
+        for(int i=0;i<s.size()-k*l+1;i++){//finding a word
+            unordered_map<string, int>m;
+            for(int j=i;j<i+k*l;j+=l){
+                string str=s.substr(j,l);//getting a substring
+                m[str]++;
+            }
+            if(ump==m){
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+};
+
+    
