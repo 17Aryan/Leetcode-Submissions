@@ -1,0 +1,32 @@
+class Solution {
+public:
+    
+    void help(int k,vector<int>& candidates, int size, int s, int target,vector<int>& temp,vector<vector<int>>& ans){
+        if(s==target){
+            ans.push_back(temp);
+            return;
+        }
+        for(int i=k;i<size;i++){
+            if(i!=k && candidates[i]==candidates[i-1])
+                continue;
+            if(s+candidates[i]>target)
+                break;
+            s+=candidates[i];
+            temp.push_back(candidates[i]);
+            help(i+1,candidates,size,s,target,temp,ans);
+            s-=candidates[i];
+            temp.pop_back();
+        }
+    }
+    
+    
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        int size=candidates.size();
+        vector<vector<int>> ans;
+        vector<int> temp;
+        sort(candidates.begin(),candidates.end());
+        
+        help(0,candidates,size,0,target,temp,ans);
+        return ans;
+    }
+};
